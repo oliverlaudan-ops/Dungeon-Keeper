@@ -730,7 +730,7 @@
         // Update UI
         function updateUI() {
             document.getElementById('gold').textContent = Math.floor(game.resources.gold);
-            document.getElementById('souls').textContent = Math.resources.souls || 0;
+            document.getElementById('souls').textContent = game.resources.souls || 0;
             document.getElementById('food').textContent = Math.floor(game.resources.food);
             document.querySelector('#food + span').textContent = `/ ${game.resources.maxFood}`;
             document.getElementById('imps').textContent = game.resources.imps;
