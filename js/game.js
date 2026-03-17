@@ -269,6 +269,9 @@
                 // Resource generation from buildings
                 if (game.buildings['gold_mine']) {
                     game.resources.gold += game.buildings['gold_mine'] * 5;
+                } else {
+                    // Small passive income if no gold mine
+                    game.resources.gold += 1;
                 }
                 if (game.buildings['kitchen']) {
                     game.resources.food += game.buildings['kitchen'] * 2;
