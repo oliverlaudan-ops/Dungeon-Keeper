@@ -43,6 +43,7 @@
             income: [
                 { id: 'treasure_room', name: 'Treasure Room', icon: '💰', cost: 40, effect: '+10% gold' },
                 { id: 'gold_mine', name: 'Gold Mine', icon: '⛏️', cost: 500, effect: '+5 gold/tick' },
+                { id: 'kitchen', name: 'Kitchen', icon: '🍳', cost: 100, effect: '+2 food/tick' },
                 { id: 'offering_pit', name: 'Offering Pit', icon: '🕯️', cost: 150, effect: '+1 soul/10 heroes' }
             ],
             utilities: [
@@ -251,10 +252,13 @@
             game.wave.active = false;
             game.wave.timer = 60;
             game.stats.dungeonLevel = Math.floor(game.stats.heroesDefeated / 10) + 1;
+            
+            // Food reward per wave
+            game.resources.food += 10 + (game.wave.waveNumber * 2);
 
             document.getElementById('wave-status-text').textContent = '☀️ Peaceful - Heroes approaching...';
             document.getElementById('wave-progress').style.display = 'none';
-            log(`✅ Wave ${game.wave.waveNumber} complete! Dungeon level: ${game.stats.dungeonLevel}`, 'wave');
+            log(`✅ Wave ${game.wave.waveNumber} complete! +${10 + (game.wave.waveNumber * 2)} Food`, 'wave');
         }
 
         // Game Loop
@@ -265,6 +269,9 @@
                 // Resource generation from buildings
                 if (game.buildings['gold_mine']) {
                     game.resources.gold += game.buildings['gold_mine'] * 5;
+                }
+                if (game.buildings['kitchen']) {
+                    game.resources.food += game.buildings['kitchen'] * 2;
                 }
 
                 // Food consumption
